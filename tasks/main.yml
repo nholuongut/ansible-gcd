@@ -1,0 +1,14 @@
+---
+- name: up gcd
+  docker_container:
+    name: gcd
+    image: "{{ gcd_docker_image }}"
+    pull: true
+    state: started
+    privileged: true
+    env:
+      GCD_DOCKER_HOST: "{{ gcd_docker_host }}"
+      GCD_SWEEP_INTERVAL: "{{ gcd_sweep_interval }}"
+      GCD_REMOVE_HEALTHY_CONTAINERS_EXITED: "{{ gcd_remove_healthy_containers_exited }}"
+    volumes:
+      - "{{ gcd_sock_volume_src }}:{{ gcd_sock_volume_dst }}:rw"
